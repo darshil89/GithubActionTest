@@ -48,7 +48,7 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
 
       - name: Build Docker image
-        run: docker build -t mahraurdarshil89/github-actions:latest .
+        run: docker build -t mahraurdarshil89/github-actions:temporary .
 
       - name: Push temporary Docker image
         run: docker push mahraurdarshil89/github-actions:temporary
