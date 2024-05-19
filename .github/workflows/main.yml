@@ -13,8 +13,6 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
-
-
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This is for the installation of the dependencies
@@ -34,8 +32,6 @@ jobs:
         run: npm install
 
     if: (github.event_name == 'pull_request'  && github.event.action == 'opened' || github.event.action == 'synchronize') || github.event_name == 'push'
-
-    
 
   # This workflow contains a single job called "build"
   build:
@@ -60,7 +56,7 @@ jobs:
         run: docker push mahraurdarshil89/github-actions:temporary
 
     # Run this job only when it's not a pull request or when a pull request is closed and merged
-    if: github.event_name != 'pull_request' || (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true)
+    if: (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true)
 
   deploy:
     runs-on: ubuntu-latest
@@ -86,7 +82,7 @@ jobs:
         run: docker push mahraurdarshil89/github-actions:latest
 
     # Run this job only when it's not a pull request or when a pull request is closed and merged
-    if: github.event_name != 'pull_request' || (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true)
+    if: (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true)
 
   test:
     runs-on: ubuntu-latest
@@ -97,4 +93,4 @@ jobs:
         run: echo I am Darshil
 
     # Run this job only when it's not a pull request or when a pull request is closed and merged
-    if: github.event_name != 'pull_request' || (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true)
+    if: (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true)
